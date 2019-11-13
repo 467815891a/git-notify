@@ -88,7 +88,7 @@ echo "Watching branch $branch"
 
 # loop forever, need to kill the process.
 while [ 1 ]; do
-
+    git pull
     # get the latest revision SHA.
     current_revision=`git rev-parse $branch`
 
@@ -111,7 +111,10 @@ while [ 1 ]; do
     		command="osascript -e 'display notification \"$body\" with title \"$summary\"'"
     		eval $command
     	else
-            `notify-send "$summary" "$body"`
+			url="https://sc.ftqq.com/SCU912T445b44fc91b89a1b58fb69cf27cc4eb9569f1e870bba6.send?text=Git更新啦~&desp=`echo $commit_summary | sed 's/\s\+/_/g'`"
+			echo $url
+			curl  -s $url
+            #`notify-send "$summary" "$body"`
     	fi
     fi
     sleep "$refresh_delay"
