@@ -90,7 +90,7 @@ echo "Watching branch $branch"
 while [ 1 ]; do
 
     # get the latest revision SHA.
-    current_revision=`git rev-parse $repository`
+    current_revision=`git rev-parse $branch`
 
     # if we haven't seen that one yet, then we know there's new stuff.
     if [ $latest_revision != $current_revision ]; then
@@ -105,7 +105,7 @@ while [ 1 ]; do
         commit_body=`git log -1 $format_body $latest_revision`
 
         # notify the user of the commit.
-        summary="$commit_name committed to $repository $commit_when!"
+        summary="$commit_name committed to $branch $commit_when!"
         body="$commit_summary\n\n$commit_body"
     	if [ "`uname`" == "Darwin" ]; then
     		command="osascript -e 'display notification \"$body\" with title \"$summary\"'"
